@@ -1,39 +1,54 @@
 import React from "react";
+import img11 from "../../assets/images/amazon-pay.png";
+import img12 from "../../assets/images/American-Express-Color.png";
+import img13 from "../../assets/images/mastercard.webp";
+import img14 from "../../assets/images/paypal.png";
+import img15 from "../../assets/images/get-apple-store.png";
+import img16 from "../../assets/images/get-google-play.png";
 
-export default function () {
+export default function FooterUp() {
   return (
     <>
-      <div className="footer-up row">
-        <div className="col-12 col-md-4 p-3">
-          <h3 className="pt-3">LOCATION</h3>
-          <p>2215 John Daniel Drive</p>
-          <p>Clark, MO 65243</p>
-        </div>
-        <div className="col-12 col-md-4 p-3">
-          <h3 className="pt-3">AROUND THE WEB</h3>
-          <div className="d-flex justify-content-center ">
-            <div className="d-flex justify-content-around align-self-center pt-3 pb-3 pe-2 ps-2 me-3 border rounded-circle">
-              <i className="fa-brands fa-facebook fa-lg color" />
+      <footer className="bg-slate-100 py-10 px-4 mt-10 ">
+        <div className="container mx-auto text-left">
+          <h3 className="text-3xl font-semibold mb-2 text-slate-600">
+            Get the FreshCart app
+          </h3>
+          <p className="text-sm font-semibold text-slate-500 mb-4">
+            We will send you a link, open it on your phone to download the app.
+          </p>
+
+          <div className="w-full flex gap-2 mb-6">
+            <input
+              type="email"
+              placeholder="Email..."
+              className="w-4/5 border border-gray-300 rounded px-4 py-2"
+            />
+            <button className="w-1/5 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+              Share Link
+            </button>
+          </div>
+
+          <div className="flex items-center flex-wrap gap-4 mb-3 mt-5 justify-between border-y-2 border-gray-200">
+            <div className="flex items-center flex-wrap gap-4 mb-3">
+              <h3 className=" text-l font-semibold  text-slate-600">
+                Payment Partners:
+              </h3>
+              <img src={img11} alt="Mastercard" className="w-20" />
+              <img src={img12} alt="Visa" className="w-20" />
+              <img src={img13} alt="Paypal" className="w-20" />
+              <img src={img14} alt="Paypal" className="w-20" />
             </div>
-            <div className="d-flex justify-content-around align-self-center pt-3 pb-3 pe-2 ps-2 me-3 border rounded-circle">
-              <i className="fa-brands fa-twitter fa-lg color" />
-            </div>
-            <div className="d-flex justify-content-around align-self-center pt-3 pb-3 pe-2 ps-2 me-3 border rounded-circle">
-              <i className="fa-brands fa-linkedin fa-lg color" />
-            </div>
-            <div className="d-flex justify-content-around align-self-center pt-3 pb-3 pe-2 ps-2 me-3 border rounded-circle">
-              <i className="fa-solid fa-globe fa-lg color" />
+            <div className="flex items-center flex-wrap gap-4 mb-3">
+              <h3 className="text-l font-semibold  text-slate-600">
+                Get from me Khattab
+              </h3>
+              <img src={img15} alt="Paypal" className="w-20" />
+              <img src={img16} alt="Paypal" className="w-20" />
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-4 p-3">
-          <h3 className="pt-3">ABOUT FREELANCER</h3>
-          <p>
-            Freelance is a free to use, licensed Bootstrap theme created by
-            Route
-          </p>
-        </div>
-      </div>
+      </footer>
     </>
   );
 }
