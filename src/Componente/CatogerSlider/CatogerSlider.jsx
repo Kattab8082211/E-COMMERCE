@@ -24,13 +24,36 @@ export default function CatogerSlider() {
     slidesToScroll: 2,
     autoplay: true,
     arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
     <>
-      <Slider {...settings}>
+      <Slider className="grid grid-cols-1 w-85 mx-auto  md:grid-cols-12 gap-4 mt-5 mb-10" {...settings}>
         {categories?.map((category) => (
-          <div key={category._id}>
+          <div className="md:col-span-8 mx-auto" key={category._id}>
             <img src={category.image} className="w-full h-64 object-cover" />
           </div>
         ))}

@@ -7,11 +7,11 @@ import { AuthContext } from "../../Context/AuthContextProvider";
 import { Loader } from "lucide-react";
 
 export default function Sign() {
-  //import the input from componente is not responsive from phone screen
   const { setToken } = useContext(AuthContext);
   let navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
-  const [loding, setLodig] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const validationSchema = Yup.object({
     name: Yup.string()
       .min(3, "الاسم قصير")
@@ -31,26 +31,26 @@ export default function Sign() {
       .required("الهاتف مطلوب"),
   });
 
-  async function handelRegister(values) {
-    setLodig(true);
+  async function handleRegister(values) {
+    setLoading(true);
     try {
       const res = await axios.post(
         "https://ecommerce.routemisr.com/api/v1/auth/signup",
         values
       );
       console.log("Success:", res.data);
-      setErrorMessage(null); // Clear error if successful
+      setErrorMessage(null);
       setToken(res.data.token);
       navigate("/Login");
     } catch (error) {
       console.error("Error response:", error.response?.data);
       setErrorMessage(error.response?.data?.message || "Registration failed");
     } finally {
-      setLodig(false);
+      setLoading(false);
     }
   }
 
-  const RegesterForm = useFormik({
+  const RegisterForm = useFormik({
     initialValues: {
       name: "",
       email: "",
@@ -59,7 +59,7 @@ export default function Sign() {
       phone: "",
     },
     validationSchema: validationSchema,
-    onSubmit: handelRegister,
+    onSubmit: handleRegister,
   });
 
   return (
@@ -73,119 +73,117 @@ export default function Sign() {
         </div>
       )}
 
-      <form onSubmit={RegesterForm.handleSubmit} className="w-1/2 mx-auto">
-        <h3 className="text-2xl">Register:</h3>
+      <form onSubmit={RegisterForm.handleSubmit} className="w-full max-w-md lg:max-w-lg mx-auto px-4">
+        <h3 className="text-2xl text-center mb-6">Register:</h3>
 
         {/* Name */}
-        <div className="mt-4">
-          <label htmlFor="name" className="block mb-2 text-m font-medium">
+        <div className="mb-4">
+          <label htmlFor="name" className="block mb-2 text-sm font-medium">
             Name:
           </label>
           <input
             type="text"
             name="name"
             id="name"
-            value={RegesterForm.values.name}
-            onChange={RegesterForm.handleChange}
-            onBlur={RegesterForm.handleBlur}
+            value={RegisterForm.values.name}
+            onChange={RegisterForm.handleChange}
+            onBlur={RegisterForm.handleBlur}
             placeholder="Khattab.jr"
             className="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5"
           />
-          {RegesterForm.touched.name && RegesterForm.errors.name && (
-            <div className="text-red-500">{RegesterForm.errors.name}</div>
+          {RegisterForm.touched.name && RegisterForm.errors.name && (
+            <div className="text-red-500 mt-1">{RegisterForm.errors.name}</div>
           )}
         </div>
 
         {/* Email */}
-        <div className="mt-4">
-          <label htmlFor="email" className="block mb-2 text-m font-medium">
+        <div className="mb-4">
+          <label htmlFor="email" className="block mb-2 text-sm font-medium">
             Email:
           </label>
           <input
             type="email"
             name="email"
             id="email"
-            value={RegesterForm.values.email}
-            onChange={RegesterForm.handleChange}
-            onBlur={RegesterForm.handleBlur}
+            value={RegisterForm.values.email}
+            onChange={RegisterForm.handleChange}
+            onBlur={RegisterForm.handleBlur}
             placeholder="mail@example.com"
             className="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5"
           />
-          {RegesterForm.touched.email && RegesterForm.errors.email && (
-            <div className="text-red-500">{RegesterForm.errors.email}</div>
+          {RegisterForm.touched.email && RegisterForm.errors.email && (
+            <div className="text-red-500 mt-1">{RegisterForm.errors.email}</div>
           )}
         </div>
 
         {/* Password */}
-        <div className="mt-4">
-          <label htmlFor="password" className="block mb-2 text-m font-medium">
+        <div className="mb-4">
+          <label htmlFor="password" className="block mb-2 text-sm font-medium">
             Password:
           </label>
           <input
             type="password"
             name="password"
             id="password"
-            value={RegesterForm.values.password}
-            onChange={RegesterForm.handleChange}
-            onBlur={RegesterForm.handleBlur}
+            value={RegisterForm.values.password}
+            onChange={RegisterForm.handleChange}
+            onBlur={RegisterForm.handleBlur}
             placeholder="Password"
             className="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5"
           />
-          {RegesterForm.touched.password && RegesterForm.errors.password && (
-            <div className="text-red-500">{RegesterForm.errors.password}</div>
+          {RegisterForm.touched.password && RegisterForm.errors.password && (
+            <div className="text-red-500 mt-1">{RegisterForm.errors.password}</div>
           )}
         </div>
 
         {/* Re-Password */}
-        <div className="mt-4">
-          <label htmlFor="rePassword" className="block mb-2 text-m font-medium">
+        <div className="mb-4">
+          <label htmlFor="rePassword" className="block mb-2 text-sm font-medium">
             Confirm Password:
           </label>
           <input
             type="password"
             name="rePassword"
             id="rePassword"
-            value={RegesterForm.values.rePassword}
-            onChange={RegesterForm.handleChange}
-            onBlur={RegesterForm.handleBlur}
+            value={RegisterForm.values.rePassword}
+            onChange={RegisterForm.handleChange}
+            onBlur={RegisterForm.handleBlur}
             placeholder="Confirm Password"
             className="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5"
           />
-          {RegesterForm.touched.rePassword &&
-            RegesterForm.errors.rePassword && (
-              <div className="text-red-500">
-                {RegesterForm.errors.rePassword}
-              </div>
-            )}
+          {RegisterForm.touched.rePassword && RegisterForm.errors.rePassword && (
+            <div className="text-red-500 mt-1">{RegisterForm.errors.rePassword}</div>
+          )}
         </div>
 
         {/* Phone */}
-        <div className="mt-4">
-          <label htmlFor="phone" className="block mb-2 text-m font-medium">
+        <div className="mb-4">
+          <label htmlFor="phone" className="block mb-2 text-sm font-medium">
             Phone:
           </label>
           <input
             type="tel"
             name="phone"
             id="phone"
-            value={RegesterForm.values.phone}
-            onChange={RegesterForm.handleChange}
-            onBlur={RegesterForm.handleBlur}
+            value={RegisterForm.values.phone}
+            onChange={RegisterForm.handleChange}
+            onBlur={RegisterForm.handleBlur}
             placeholder="01XXXXXXXXX"
             className="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5"
           />
-          {RegesterForm.touched.phone && RegesterForm.errors.phone && (
-            <div className="text-red-500">{RegesterForm.errors.phone}</div>
+          {RegisterForm.touched.phone && RegisterForm.errors.phone && (
+            <div className="text-red-500 mt-1">{RegisterForm.errors.phone}</div>
           )}
         </div>
 
         {/* Submit */}
-        <div className="mt-5">
+        <div className="mt-6 text-center">
           <button
+            disabled={loading}
             type="submit"
-            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-2.5"
+            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 w-full flex justify-center items-center"
           >
-            {loding ? <Loader /> : <span>Submit</span>}
+            {loading ? <Loader className="animate-spin" /> : <span>Register</span>}
           </button>
         </div>
       </form>
