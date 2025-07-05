@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 
 export default function CatogerSlider() {
   const [categories, setCategories] = useState(null);
+
   async function getCategories() {
     let { data } = await axios.get(
       "https://ecommerce.routemisr.com/api/v1/categories"
@@ -12,11 +12,22 @@ export default function CatogerSlider() {
     console.log(data);
     setCategories(data.data);
   }
+
   useEffect(() => {
     getCategories();
   }, []);
 
-  var settings = {
+  const phoneSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    arrows: true,
+  };
+
+  const desktopSettings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -24,40 +35,45 @@ export default function CatogerSlider() {
     slidesToScroll: 2,
     autoplay: true,
     arrows: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
 
   return (
     <>
-      <Slider className="grid grid-cols-1 w-85 mx-auto  md:grid-cols-12 gap-4 mt-5 mb-10" {...settings}>
+      
+      <div className=" p-4 block md:hidden">
+      <Slider
+        className=" w-[90%] mx-auto mt-5 mb-10"
+        {...phoneSettings}
+      >
         {categories?.map((category) => (
-          <div className="md:col-span-8 mx-auto" key={category._id}>
-            <img src={category.image} className="w-full h-64 object-cover" />
+          <div key={category._id}>
+            <img
+              src={category.image}
+              alt={category.name}
+              className="w-full h-56 object-cover rounded shadow "
+            />
           </div>
         ))}
       </Slider>
+
+</div>
+<div className=" p-4 hidden md:block">
+<Slider
+        className="hidden md:block container md:max-w-2xl lg:max-w-4xl xl:max-w-7xl 2xl:max-w-9xl mx-auto mt-5 mb-10"
+        {...desktopSettings}
+      >
+        {categories?.map((category) => (
+          <div key={category._id}>
+            <img
+              src={category.image}
+              alt={category.name}
+              className="w-full h-64 object-cover rounded shadow"
+            />
+          </div>
+        ))}
+      </Slider>
+</div>
+      
     </>
   );
 }

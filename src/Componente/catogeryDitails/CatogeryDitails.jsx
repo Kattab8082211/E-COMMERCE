@@ -36,7 +36,7 @@ export default function CatogeryDitails() {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl mb-6 text-center font-bold text-green-600">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-10 text-center text-green-500">
         Products in Category
       </h1>
       {products.length === 0 ? (

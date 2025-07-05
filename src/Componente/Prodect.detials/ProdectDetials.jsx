@@ -59,50 +59,53 @@ export default function ProdectDetials() {
   }
   return (
     <>
-      <div className="grid grid-cols-[1fr_2fr] gap-3 items-center pt-7">
-        <div className="w-full max-w-2xl mx-auto">
-          <Slider {...settings} className="w-100 mx-auto">
-            {product?.images.map((src) => (
-              <img src={src} />
-            ))}
-          </Slider>
-        </div>
+<div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 items-center pt-7">
+  {/* Slider section */}
+  <div className="w-85 max-w-2xl mx-auto">
+    <Slider {...settings} className="w-full mx-auto">
+      {product?.images.map((src, index) => (
+        <img key={index} src={src} alt={`Product image ${index}`} className="w-full h-64 object-cover rounded-lg" />
+      ))}
+    </Slider>
+  </div>
 
-        <div>
-          <h2 className="mb-3">{product.title}</h2>
-          <h3 className="mb-3 text-gray-400">{product.description}</h3>
-          <h3 className="">{product.category.name}</h3>
-          <div className="flex justify-between">
-            {product.priceAfterDiscount ? (
-              <>
-                <h3 className="text-red-500 line-through">
-                  {product.price} EGP
-                </h3>
-                <h3>{product.priceAfterDiscount} EGP</h3>
-              </>
-            ) : (
-              <h3>{product.price} EGP</h3>
-            )}
+  {/* Product details */}
+  <div className="px-4 md:px-0">
+    <h2 className="mb-3 text-xl font-semibold">{product.title}</h2>
+    <h3 className="mb-3 text-gray-500">{product.description}</h3>
+    <h3 className="mb-3 font-medium">{product.category.name}</h3>
 
-            <span>
-              <i className="  fa-solid fa-star text-yellow-100"></i>
-              {product.ratingsAverage}
-            </span>
-          </div>
-          <button
-            onClick={() => addProtuctToCart(product._id)}
-            className="  duration-200 mt-5 w-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
-          >
-            <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-200 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
-              Add To Cart
-            </span>
-          </button>
-        </div>
-      </div>
-      <h3 className="text-6xl mt-10 text-center text-green-500">
+    <div className="flex justify-between mb-3">
+      {product.priceAfterDiscount ? (
+        <>
+          <h3 className="text-red-500 line-through">{product.price} EGP</h3>
+          <h3 className="text-green-600 font-bold">{product.priceAfterDiscount} EGP</h3>
+        </>
+      ) : (
+        <h3 className="text-green-600 font-bold">{product.price} EGP</h3>
+      )}
+
+      <span className="flex items-center gap-1 text-yellow-500 font-medium">
+        <i className="fa-solid fa-star"></i>
+        {product.ratingsAverage}
+      </span>
+    </div>
+
+    <button
+      onClick={() => addProtuctToCart(product._id)}
+      className="duration-200 mt-5 w-full relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 hover:from-teal-400 hover:to-lime-400 focus:ring-4 focus:outline-none focus:ring-lime-200"
+    >
+      <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-200 bg-white rounded-md group-hover:bg-transparent">
+        Add To Cart
+      </span>
+    </button>
+  </div>
+</div>
+
+      <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-10 text-center text-green-500">
         Related Product
       </h3>
-      <div className=" gap-3  m-2 mt-5  grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className=" gap-3  m-2 mt-5  grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
         {relatedProdect?.map((prodect) => (
           <div
             className=" relative group overflow-hidden shadow-xl p-2 mt-5"
