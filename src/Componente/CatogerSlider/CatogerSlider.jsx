@@ -57,7 +57,7 @@ export default function CatogerSlider() {
       </Slider>
 
 </div>
-<div className=" p-4 hidden md:block">
+<div className="  hidden md:block">
 <Slider
         className="hidden md:block container md:max-w-2xl lg:max-w-4xl xl:max-w-7xl 2xl:max-w-9xl mx-auto mt-5 mb-10"
         {...desktopSettings}
