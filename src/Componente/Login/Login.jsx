@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContextProvider";
 import { Loader } from "lucide-react";
 import { jwtDecode } from "jwt-decode";
-
+import { Link } from 'react-router-dom';
 export default function Sign() {
   const { setToken, setidUser } = useContext(AuthContext);
   let navigate = useNavigate();
@@ -117,6 +117,12 @@ export default function Sign() {
             {loading ? <Loader className="animate-spin" /> : <span>Login</span>}
           </button>
         </div>
+        <p className="text-sm text-center mt-4 text-gray-600">
+  Forgot your password?{" "}
+  <Link to="/forgot-password" className="text-blue-600 hover:underline">
+    Click here
+  </Link>
+</p>
       </form>
     </>
   );

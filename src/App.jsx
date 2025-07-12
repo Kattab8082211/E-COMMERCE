@@ -19,6 +19,7 @@ import CatogeryDitails from "./Componente/catogeryDitails/CatogeryDitails";
 import BrandesDitalse from "./Componente/BrandesDItails/BrandesDitalse";
 import WishlistContextProvider from "./Context/WishlistContextProvider";
 import Wishlist from "./Componente/Wishlist/Wishlist";
+import ForgotPassword from "./Componente/ForgetPassored/ForgetPassored";
 
 function App() {
   let router = createBrowserRouter([
@@ -37,6 +38,7 @@ function App() {
         { path: "Brands", element: <Brands /> },
         { path: "Payment", element: <Payment /> },
         { path: "allorders", element: <OlOrders /> },
+        {path:"forgot-password", element:<ForgotPassword />},
         { path: "Login", element: <Login /> },
         { path: "sign", element: <Sign /> },
         { path: "contact", element: <Contact /> },
